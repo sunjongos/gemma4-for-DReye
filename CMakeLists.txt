@@ -14,6 +14,10 @@ add_subdirectory(third_party/gemma.cpp)
 # Link gemma.cpp target (the core inference library)
 target_link_libraries(drey_ai_edge PRIVATE gemma)
 
-# Placeholder configuration for future Android/iOS JNI & Swift bindings
-# add_subdirectory(android)
-# add_subdirectory(ios)
+# Medical CAD Flags for stability and safe execution
+add_compile_options(-Wall -Wextra -Werror)
+
+# Include Android Subsystem (JNI Bridge) if building for Android natively or via NDK
+if (ANDROID OR DREYE_BUILD_ANDROID)
+    add_subdirectory(android)
+endif()
